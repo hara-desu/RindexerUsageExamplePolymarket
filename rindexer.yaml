@@ -1,0 +1,29 @@
+name: polymarketIndexer
+project_type: no-code
+config: {}
+timestamps: null
+networks:
+  - name: polygon
+    chain_id: 137
+    rpc: ${ALCHEMY_API}
+storage:
+  csv:
+    enabled: true
+    path: ./generated_csv
+native_transfers:
+  enabled: false
+contracts:
+  - name: NegRiskCtfExchange
+    details:
+      - network: polygon
+        address: 0xC5d563A36AE78145C45a50134d48A1215220f80a
+        start_block: "79213501"
+    abi: ./abis/Polymarket.abi.json
+    include_events:
+      - name: OrderFilled
+      - name: OrdersMatched
+      - name: OrderCancelled
+      - name: FeeCharged
+      - name: TokenRegistered
+global:
+  health_port: 0
